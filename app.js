@@ -94,12 +94,12 @@ app.set('view engine', 'ejs')
 
 app.use('/sb-admin-2', express.static(path.join(__dirname, 'asset/sb-admin-2')));
 
-//fetch data with axios
+//fetch admin view dashboard
 app.get('/', async(req, res) => {
   try {
-    const response = await axios.get('http://localhost:4000/api/video');
-    const data = response.data;
-res.render('table', { data })
+    // const response = await axios.get('http://localhost:4000/api/video');
+    // const data = response.data;
+res.render('admin/view_dashboard')
 
  // Kirim tabel sebagai response
     res.send(tableHTML);
@@ -109,6 +109,38 @@ res.render('table', { data })
   }
   
 })
+
+//fetch data video with axios
+app.get('/video', async(req, res) => {
+  try {
+    const response = await axios.get('http://localhost:4000/api/video');
+    const data = response.data;
+res.render('admin/video/view_video', { data })
+
+ // Kirim tabel sebagai response
+    res.send(tableHTML);
+  } catch (error) {
+    console.error(error);
+    // res.status(500).send('Terjadi kesalahan pada server');
+  }
+  
+})
+
+//fetch data avatar with axios
+// app.get('/', async(req, res) => {
+//   try {
+//     const response = await axios.get('http://localhost:4000/api/video');
+//     const data = response.data;
+// res.render('admin/avatar/table', { data })
+
+//  // Kirim tabel sebagai response
+//     res.send(tableHTML);
+//   } catch (error) {
+//     console.error(error);
+//     // res.status(500).send('Terjadi kesalahan pada server');
+//   }
+  
+// })
 
 // app.get('/:name', (req, res) => res.send(`Nama Saya : ${req.params.name}`))
 
