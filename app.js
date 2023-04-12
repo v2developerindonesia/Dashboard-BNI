@@ -29,6 +29,7 @@ const cors = require('cors')
 const __basedir = path.resolve()
 const app = express()
 const axios = require('axios')
+const upload = require('./src/services/upload')
 
 dotenv.config()
 
@@ -123,27 +124,27 @@ res.render('admin/video/view_video', { data })
     console.error(error);
     // res.status(500).send('Terjadi kesalahan pada server');
   }
-  
 })
 
-//fetch data avatar with axios
-// app.get('/', async(req, res) => {
-//   try {
-//     const response = await axios.get('http://localhost:4000/api/video');
-//     const data = response.data;
-// res.render('admin/avatar/table', { data })
-
-//  // Kirim tabel sebagai response
-//     res.send(tableHTML);
-//   } catch (error) {
-//     console.error(error);
-//     // res.status(500).send('Terjadi kesalahan pada server');
-//   }
+//post data video with axios
+app.post('/video', async(req, res) => {
+  try {
+    const response = await axios.post('http://localhost:4000/api/video', HTTP/1/ {
+      Headers: 'aplication/json'
+    });
+    const data = response.data;
   
-// })
+res.render('admin/video/view_video', { data })
+
+ // Kirim tabel sebagai response
+    res.send(tableHTML);
+  } catch (error) {
+    console.error(error);
+    // res.status(500).send('Terjadi kesalahan pada server');
+  }
+})
 
 // app.get('/:name', (req, res) => res.send(`Nama Saya : ${req.params.name}`))
-
 
 const PORT = process.env.APP_PORT || 4000
 
