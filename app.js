@@ -30,6 +30,7 @@ const __basedir = path.resolve()
 const app = express()
 const axios = require('axios')
 const upload = require('./src/services/upload')
+const adminRouter = require('./src/routes')
 
 dotenv.config()
 
@@ -95,6 +96,9 @@ app.set('view engine', 'ejs')
 
 app.use('/sb-admin-2', express.static(path.join(__dirname, 'asset/sb-admin-2')));
 
+//route method
+app.use('/admin', adminRouter)
+
 //fetch admin view dashboard
 app.get('/', async(req, res) => {
   try {
@@ -134,13 +138,13 @@ app.post('/video', async(req, res) => {
     });
     const data = response.data;
   
-res.render('admin/video/view_video', { data })
+res.render('admin/video/additem', { data })
 
  // Kirim tabel sebagai response
     res.send(tableHTML);
   } catch (error) {
     console.error(error);
-    // res.status(500).send('Terjadi kesalahan pada server');
+ // res.status(500).send('Terjadi kesalahan pada server');
   }
 })
 
